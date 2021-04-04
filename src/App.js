@@ -1,11 +1,16 @@
-import logo from './logo.svg';
-import './App.css';
-
+//antd library
+import 'antd/dist/antd.css';
+//import router
+import {BrowserRouter as Router,Rout,Switch} from 'react-router-dom'
+import Authpage from './Components/Authentication/AuthPage/Authpage';
+//import componnets
 function App() {
   return (
-    <div className="App">
-     twitter clone
-    </div>
+    <>
+      <Authpage/>
+
+
+    </>
   );
 }
 
