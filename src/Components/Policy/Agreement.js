@@ -1,11 +1,21 @@
-import React from 'react'
-import { Form, Checkbox } from 'antd'
+import React ,{useState}from 'react'
+import { Form, Checkbox ,Button} from 'antd'
+import { Link ,useHistory} from 'react-router-dom'
 function Agreement() {
-    
-    function onChange(e) {
-        console.log(`checked = ${e.target.checked}`);
-      }
-      
+const [check, setCheck] = useState(false)
+   const handleChange = (e) => {
+       setCheck({check: !check})
+       console.log(check,'check',setCheck,'set check');
+
+   }
+   const handleSubmit = (e) => {
+       e.preventDefault();
+       console.log(check,'check',setCheck,'set check');
+   }
+   let history = useHistory();
+   const redirect = () => {
+    history.push('/mainwall/mainwall')
+  }
     return (
         <div>
             <p>
@@ -19,7 +29,9 @@ function Agreement() {
 
                 Duis dignissim porttitor ante, quis congue magna facilisis aliquet. Aenean tempus sapien nisl, vel pellentesque eros pharetra eget. Aenean auctor eros a odio interdum, in condimentum augue volutpat. Ut aliquet enim ac nulla laoreet, dapibus lacinia ex rhoncus. Suspendisse id eros ac arcu sodales laoreet. Integer auctor nisl tellus, sed malesuada sapien posuere vitae. Vivamus tincidunt ullamcorper justo id accumsan. Etiam mattis ante nibh, id auctor diam placerat eu. Curabitur hendrerit odio ac ante gravida, at faucibus metus sodales.
             </p>
+            <Form   onSubmit={handleSubmit}>
             <Form.Item
+
                 name="agreement"
                 valuePropName="checked"
                 rules={[
@@ -28,12 +40,20 @@ function Agreement() {
                             value ? Promise.resolve() : Promise.reject(new Error('Should accept agreement')),
                     },
                 ]}
-              
+
             >
-                <Checkbox >
-                    I have read the agreement
+                <Checkbox onChange={handleChange}>   
+                        I agree to privacy  policy
                 </Checkbox>
             </Form.Item>
+            <Form.Item>
+                <Button onClick={check ? redirect : ''}
+                type="primary" htmlType="submit">
+                        next
+                 </Button>
+            </Form.Item>
+            </Form>
+           
         </div>
     )
 }

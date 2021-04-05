@@ -7,6 +7,7 @@ import Authpage from './Components/Authentication/AuthPage/Authpage';
 import SignUp from './Components/Authentication/SignUp/SignUp'
 import Login from './Components/Authentication/Login/Login'
 import Agreement from './Components/Policy/Agreement';
+import MainWall from './Components/MainWall/MainWall';
 function App() {
   return (
     <>
@@ -18,6 +19,7 @@ function App() {
           <Route path="/signup" component={SignUp}/>
           <Route path="/login" component={Login}/>
           <Route path="/policy/agreement" component={Agreement}/>
+          <Route path="/mainwall/mainwall" component={MainWall}/>
         </Switch>
       </Router>
 
