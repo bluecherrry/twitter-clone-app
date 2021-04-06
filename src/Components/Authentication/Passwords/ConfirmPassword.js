@@ -25,7 +25,7 @@ function ConfirmPassword(props) {
                     }),
                 ]}
             >
-                <Input.Password value={props.Passwords} className="inputs"/>
+                <Input.Password value={props.confirm} className="inputs"/>
             </Form.Item>
         </div>
     )

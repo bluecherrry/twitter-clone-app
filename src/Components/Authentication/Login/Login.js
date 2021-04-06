@@ -1,11 +1,15 @@
 import React from 'react'
+import axios from 'axios'
+import results from '../../../firebase/baseurl'
 import UserNameForm from '../UserName/UserNameForm'
 import PasswordForms from '../Passwords/PasswordForms'
 import { Button, Form ,Checkbox} from 'antd'
 
 function Login() {
-    const onFinish = (values) => {
-        console.log('Received values of form: ', values);
+    const onFinish = async (values) => {
+      const response = await axios.get(`https://twitter-app-ddf5b-default-rtdb.firebaseio.com/signUp.json`)
+        return response.values;
+        console.log(response.values);
     };
     return (
         <div>
