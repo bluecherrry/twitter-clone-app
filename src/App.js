@@ -4,7 +4,7 @@ import 'antd/dist/antd.css';
 import {BrowserRouter as Router,Route,Switch} from 'react-router-dom'
 import Authpage from './Components/Authentication/AuthPage/Authpage';
 //import componnets
-import SignUp from './Components/Authentication/SignUp/SignUp'
+import Register from './Components/Authentication/Register/Register'
 import Login from './Components/Authentication/Login/Login'
 import Agreement from './Components/Policy/Agreement';
 import MainWall from './Components/MainWall/MainWall';
@@ -16,7 +16,7 @@ function App() {
         <Route exact path="/" component={Authpage}/>
         
         <Switch>
-          <Route path="/signup" component={SignUp}/>
+          <Route path="/register/register" component={Register}/>
           <Route path="/login" component={Login}/>
           <Route path="/policy/agreement" component={Agreement}/>
           <Route path="/mainwall/mainwall" component={MainWall}/>

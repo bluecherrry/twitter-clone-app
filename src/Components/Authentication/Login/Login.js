@@ -1,48 +1,73 @@
 import React from 'react'
-import axios from 'axios'
-import results from '../../../firebase/baseurl'
-import UserNameForm from '../UserName/UserNameForm'
-import PasswordForms from '../Passwords/PasswordForms'
-import { Button, Form ,Checkbox} from 'antd'
 
+
+import { Button, Form, Checkbox, Input, Row, Card, Col } from 'antd'
+import { UserOutlined, LockOutlined } from '@ant-design/icons';
 function Login() {
-    const onFinish = async (values) => {
-      const response = await axios.get(`https://twitter-app-ddf5b-default-rtdb.firebaseio.com/signUp.json`)
-        return response.values;
-        console.log(response.values);
+    const onFinish = (values) => {
+        console.log("values");
     };
     return (
-        <div>
-            <Form
-                name="normal_login"
-                className="login-form"
-                initialValues={{
-                    remember: true,
-                }}
-                onFinish={onFinish}
-            >
-                <UserNameForm />
-                <PasswordForms />
-                <Form.Item>
-                    <Form.Item name="remember" valuePropName="checked" noStyle>
-                        <Checkbox>Remember me</Checkbox>
-                    </Form.Item>
+        <Row justify="center" className="register">
+            <Col xs={24} xl={12} className="register-col">
+                <Card title="Log In"
+                    className="card-register">
+                    <Form
+                        name="normal_login"
+                        className="register-form"
+                        initialValues={{
+                            remember: true,
+                        }}
+                        onFinish={onFinish}
+                    >
+                        <Form.Item
+                            name="username"
+                            rules={[
+                                {
+                                    required: true,
+                                    message: 'Please input your Username!',
+                                },
+                            ]}
+                        >
+                            <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Username" className="inputs" />
+                        </Form.Item>
+                        <Form.Item
+                            name="password"
+                            rules={[
+                                {
+                                    required: true,
+                                    message: 'Please input your Password!',
+                                },
+                            ]}
+                        >
+                            <Input
+                                prefix={<LockOutlined className="site-form-item-icon" />}
+                                type="password"
+                                placeholder="Password"
+                            />
+                        </Form.Item>
+                        <Form.Item>
+                            <Form.Item name="remember" valuePropName="checked" noStyle>
+                                <Checkbox>Remember me</Checkbox>
+                            </Form.Item>
 
-                    <a className="login-form-forgot" href="">
-                        Forgot password
-        </a>
-                </Form.Item>
-                <Button>
-                    log in
-                </Button>
-                Or <a href="/signup">register now!</a>
+                            <a className="login-form-forgot" href="">
+                                Forgot password
+                                </a>
+                        </Form.Item>
 
-            </Form>
-
-
-
-        </div>
+                        <Form.Item>
+                            <Button type="primary" htmlType="submit" className="login-form-button">
+                                Log in
+                         </Button>
+                                    Or <a href="">register now!</a>
+                        </Form.Item>
+                    </Form>
+                </Card>
+            </Col>
+        </Row>
     )
+
 }
 
 export default Login
