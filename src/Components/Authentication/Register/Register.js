@@ -1,9 +1,7 @@
-import React, { useState, useRef } from 'react'
-import { Link, useHistory } from 'react-router-dom'
-import { FormInstance, FormItemProps } from 'antd/es/form';
-import { Input, Form, Button, Row, Col, Card, Alert, message } from 'antd'
+import React, { useRef } from 'react'
+import { Link} from 'react-router-dom'
+import { Input, Form, Button, Row, Col, Card } from 'antd'
 import { useAuth } from '../../../Context/AuthContext'
-import Agreement from '../../Policy/Agreement';
 import axios from 'axios';
 
 
@@ -145,9 +143,9 @@ function RegisterForm(props) {
                                     }
                                 >
                                     <Link to="/policy/agreement">
-                                    
+                                      sign up
                                     </Link>
-                                    sign up
+                                  
                                 </Button>
                             )}
                         </Form.Item>

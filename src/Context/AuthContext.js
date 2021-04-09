@@ -24,7 +24,9 @@ export function AuthProvider({children}) {
     //     setCurrentUser(user)
     //     //null or user//  //useEffect//  //it should be run when our component is mount 
     // })
-
+function login(email,password) {
+    return auth.signInWithEmailAndPassword(email,password)
+}
 
 
 
@@ -39,6 +41,7 @@ export function AuthProvider({children}) {
     
     const value = {
         currentUser,
+        login,
         signup
     }
     return (
