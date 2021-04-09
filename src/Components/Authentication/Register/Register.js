@@ -4,33 +4,13 @@ import { FormInstance, FormItemProps } from 'antd/es/form';
 import { Input, Form, Button, Row, Col, Card, Alert, message } from 'antd'
 import { useAuth } from '../../../Context/AuthContext'
 import Agreement from '../../Policy/Agreement';
+import axios from 'axios';
+
 
 function RegisterForm(props) {
-    const formItemLayout = {
-        labelCol: {
-            xs: {
-                span: 24
-
-            },
-            sm: {
-                span: 8,
-            },
-        },
-        wrapperCol: {
-            xs: {
-                span: 24,
-            },
-            sm: {
-                span: 16,
-            },
-        },
-    };
-    const history = useHistory();
+  
     const [form] = Form.useForm();
-    //usestate
-
-    const [error, setError] = useState('')
-    const [loading, setLoading] = useState(false)//this state is for disabling button to preventing resubmiting  
+    
     //ref
 
     const emailRef = useRef()
@@ -40,13 +20,12 @@ function RegisterForm(props) {
     //context 
     const { signup } = useAuth()
 
-
-   
-  
     const onFinish= async(value ) => {
-     return  await signup(emailRef.current.state.value, passwordRef.current.state.value)
-      
-    }
+    const createUser =  await signup(emailRef.current.state.value, passwordRef.current.state.value)
+    const postUser=  axios.post(`https://twitter-app-ddf5b-default-rtdb.firebaseio.com/userName.json`,value)
+      .then((response) => console.log(response))
+    
+}
 
     return (
         <Row justify="center" className="register">
@@ -166,9 +145,9 @@ function RegisterForm(props) {
                                     }
                                 >
                                     <Link to="/policy/agreement">
-                                      sign up
+                                    
                                     </Link>
-                                  
+                                    sign up
                                 </Button>
                             )}
                         </Form.Item>
