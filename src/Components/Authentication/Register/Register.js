@@ -1,6 +1,10 @@
-import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
-import { Input, Form, Button, Row, Col, Card } from 'antd'
+import React, { useState, useRef } from 'react'
+import { Link, useHistory } from 'react-router-dom'
+import { FormInstance, FormItemProps } from 'antd/es/form';
+import { Input, Form, Button, Row, Col, Card, Alert, message } from 'antd'
+import { useAuth } from '../../../Context/AuthContext'
+import Agreement from '../../Policy/Agreement';
+
 function RegisterForm(props) {
     const formItemLayout = {
         labelCol: {
@@ -21,34 +25,43 @@ function RegisterForm(props) {
             },
         },
     };
+    const history = useHistory();
     const [form] = Form.useForm();
-    const onFinish = (values) => {
-        // results.post('/signUp.json ', value)
-    };
+    //usestate
+
+    const [error, setError] = useState('')
+    const [loading, setLoading] = useState(false)//this state is for disabling button to preventing resubmiting  
+    //ref
+
+    const emailRef = useRef()
+    const usernameRef = useRef()
+    const passwordRef = useRef()
+    const passwordConfirmRef = useRef()
+    //context 
+    const { signup } = useAuth()
 
 
-    const [sign, setSign] = useState([
+   
+  
+    const onFinish= async(value ) => {
+     return  await signup(emailRef.current.state.value, passwordRef.current.state.value)
+      
+    }
 
-        { username: '', password: '', confirm: '' }
-    ]
-    )
-    console.log(sign.password, "user");
     return (
         <Row justify="center" className="register">
             <Col xs={24} xl={12} className="register-col">
                 <Card
                     title="Sign Up"
                     className="card-register"
-                    style={{ width: "100%" }}>
-                    <Form
-                        {...formItemLayout}
+                >
+                   <Form
                         form={form}
+                        onFinish={(value) => onFinish(value)}
                         name="register"
-                        onFinish={onFinish}
                         className="register-form"
                         scrollToFirstError
                     >
-
                         <Form.Item
                             name="email"
                             label="E-mail"
@@ -63,7 +76,7 @@ function RegisterForm(props) {
                                 },
                             ]}
                         >
-                            <Input />
+                            <Input ref={emailRef} />
                         </Form.Item>
                         <Form.Item
                             name="username"
@@ -77,8 +90,9 @@ function RegisterForm(props) {
                                 },
                             ]}
                         >
-                            <Input />
+                            <Input ref={usernameRef} />
                         </Form.Item>
+
                         <Form.Item
                             dependencies={['password']}
                             name="password"
@@ -93,68 +107,28 @@ function RegisterForm(props) {
                                     message: 'Password cannot be less than 8 characters',
                                 },
                                 {
-                                     number:true,
-                                    min : 1,
-                                    message:'password number'
+                                    pattern: new RegExp(".*[a-z]"),
+                                    message: "password must contain at least one lowercase"
                                 },
-                                //password containing uppercase and lowercase characters  and numbers error
-                                ({ getFieldValue }) => ({
-                                    validator(_, value) {
-
-                                        let upRule = false;
-                                        let lowRule = false;
-                                        let numberRule = false;
-
-
-                                        for (value of value.split("")) {
-                                            //let format = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
-
-                                            if (value == /\d/.test(value)) {
-                                                numberRule = true;
-                                                  console.log(value, "num");
-                                            }
-                                            //    if (value == format.test(value)) {
-                                            //         specialRule = true;
-                                            //         console.log(value, "special");
-                                            //           }
-
-                                            else {
-                                                if (value == value.toUpperCase()) {
-                                                    upRule = true;
-                                                    // console.log(value, "up");
-                                                }
-                                                if (value == value.toLowerCase()) {
-                                                    lowRule = true;
-                                                    // console.log(value, "low");
-                                                }
-                                            }
-
-                                        }
-                                        if (!upRule || !lowRule || !numberRule) {
-                                            upRule = false;
-                                            lowRule = false;
-                                            numberRule = false;
-                                            return Promise.reject(new Error(' password must contain ar least one uppercase, lowercase character , number '))
-                                        }
-                                        else if (upRule && lowRule && numberRule) {
-                                            upRule = false;
-                                            lowRule = false;
-                                            numberRule = false;
-                                            return Promise.resolve()
-                                        }
-                                    }
-
-                                }),
-
-
+                                {
+                                    pattern: new RegExp(".*[A-Z]"),
+                                    message: "password must contain at least one uppercase"
+                                },
+                                {
+                                    pattern: new RegExp("[0-9]"),
+                                    message: "password must contain at least one digit"
+                                },
+                                {
+                                    pattern: new RegExp(".*[!@#$%^&*]"),
+                                    message: "password must contain at least one special character"
+                                }
                             ]}
                             hasFeedback
                         >
-                            <Input.Password
-                                value={sign.password} className="inputs" />
+                            <Input.Password ref={passwordRef} className="inputs" />
                         </Form.Item>
                         <Form.Item
-                            name="confirm"
+                            name="passwordconfirm"
                             label="Confirm Password"
                             dependencies={['password']}
                             hasFeedback
@@ -165,7 +139,7 @@ function RegisterForm(props) {
                                 },
                                 ({ getFieldValue }) => ({
                                     validator(_, value) {
-                                        console.log(value, "confirrm");
+
 
                                         if (!value || getFieldValue('password') === value) {
                                             return Promise.resolve();
@@ -176,24 +150,34 @@ function RegisterForm(props) {
                                 }),
                             ]}
                         >
-                            <Input.Password value={sign.confirm} className="inputs" />
+                            <Input.Password className="inputs" ref={passwordConfirmRef} />
                         </Form.Item>
 
+                        <Form.Item shouldUpdate className="submit">
+                            {() => (
+                                <Button
+                                className="register-btn"
+                                    type="primary"
+                                    htmlType="submit"
+                                    disabled={
+                                        !form.isFieldsTouched(true) ||
+                                        form.getFieldsError().filter(({ errors }) => errors.length)
+                                            .length > 0
+                                    }
+                                >
+                                    <Link to="/policy/agreement">
+                                      sign up
+                                    </Link>
+                                  
+                                </Button>
+                            )}
+                        </Form.Item>
                     </Form>
-                    <Form.Item>
-                        <Button
-                            type="default"
-                            htmlType="submit"
-                            className="register-btn">
-                            <Link to="/policy/agreement">
-                                signUp
-                              </Link>
-                        </Button>
-                    </Form.Item>
+
                 </Card>
             </Col>
 
-        </Row>
+        </Row >
 
     )
 }
@@ -208,3 +192,74 @@ export default RegisterForm
 //     setSign(newData)
 //   //console.log(newData);
 // }
+
+
+{/* <Form.Item
+dependencies={['password']}
+name="password"
+label="Password"
+rules={[
+    {
+        required: true,
+        message: 'Please input your password!',
+    },
+    {
+        min: 8,
+        message: 'Password cannot be less than 8 characters',
+    },
+    {
+        number: true,
+        min: 1,
+        message: 'password number'
+    },
+    password containing uppercase and lowercase characters  and numbers error
+    ({ getFieldValue }) => ({
+        validator(_, value) {
+
+            let upRule = false;
+            let lowRule = false;
+            let numberRule = false;
+
+
+            for (value of value.split("")) {
+                let format = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
+
+                if (value == /\d/.test(value)) {
+                    numberRule = true;
+                    
+                }
+
+                else {
+                    if (value == value.toUpperCase()) {
+                        upRule = true;
+                       
+                    }
+                    if (value == value.toLowerCase()) {
+                        lowRule = true;
+                       
+                    }
+                }
+
+            }
+            if (!upRule || !lowRule || !numberRule) {
+                upRule = false;
+                lowRule = false;
+                numberRule = false;
+                return Promise.reject(new Error(' password must contain ar least one uppercase, lowercase character , number '))
+            }
+            else if (upRule && lowRule && numberRule) {
+                upRule = false;
+                lowRule = false;
+                numberRule = false;
+                return Promise.resolve()
+            }
+        }
+
+    }),
+
+
+]}
+hasFeedback
+>
+<Input.Password ref={passwordRef} className="inputs" />
+</Form.Item> */}

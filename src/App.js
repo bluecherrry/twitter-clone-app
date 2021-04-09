@@ -8,9 +8,10 @@ import Register from './Components/Authentication/Register/Register'
 import Login from './Components/Authentication/Login/Login'
 import Agreement from './Components/Policy/Agreement';
 import MainWall from './Components/MainWall/MainWall';
+import { AuthProvider } from './Context/AuthContext';
 function App() {
   return (
-    <>
+    <AuthProvider>
       
       <Router>
         <Route exact path="/" component={Authpage}/>
@@ -24,7 +25,7 @@ function App() {
       </Router>
 
 
-    </>
+    </AuthProvider>
   );
 }
 
