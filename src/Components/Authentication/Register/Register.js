@@ -19,8 +19,8 @@ function RegisterForm(props) {
     const { signup } = useAuth()
 
     const onFinish= async(value ) => {
-    const createUser =  await signup(emailRef.current.state.value, passwordRef.current.state.value)
-    const postUser=  axios.post(`https://twitter-app-ddf5b-default-rtdb.firebaseio.com/userName.json`,value)
+     await signup(emailRef.current.state.value, passwordRef.current.state.value)
+      axios.post(`https://twitter-app-ddf5b-default-rtdb.firebaseio.com/userName.json`,value)
       .then((response) => console.log(response))
     
 }
@@ -143,9 +143,9 @@ function RegisterForm(props) {
                                     }
                                 >
                                     <Link to="/policy/agreement">
-                                      sign up
+                              sign up
                                     </Link>
-                                  
+                                          
                                 </Button>
                             )}
                         </Form.Item>

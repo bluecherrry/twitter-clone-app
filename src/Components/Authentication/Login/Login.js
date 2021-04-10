@@ -1,5 +1,5 @@
 import React, { useState, useRef ,useEffect} from 'react'
-import { Button, Form, Checkbox, Input, Row, Card, Col } from 'antd'
+import { Button, Form, Checkbox, Input, Row, Card, Col ,Alert} from 'antd'
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import { Link, useHistory } from 'react-router-dom'
 import { useAuth } from '../../../Context/AuthContext'
@@ -12,14 +12,15 @@ function Login() {
     //context 
     const { login } = useAuth()
 
+//usestate
+const [error, setError] = useState(false)
 
     const onFinish = async (values) => {
         await login(emailRef.current.state.value, passwordRef.current.state.value)
+    .then((response) => console.log(response))
+    .catch(setError(true))
     };
-    const onFinishFailed = (errorInfo) => {
-        console.log('Failed:', errorInfo);
-      };
-
+  
     const [, forceUpdate] = useState({});
     // To disable submit button at the beginning.
     useEffect(() => {
@@ -31,6 +32,7 @@ function Login() {
             <Col xs={24} xl={12} className="register-col">
                 <Card title="Log In"
                     className="card-register">
+                        {error &&<Alert message="password or username is incorrect" type="error" /> }
                     <Form
                         form={form}
                         name="normal_login"
@@ -39,7 +41,7 @@ function Login() {
                             remember: true,
                         }}
                         onFinish={onFinish}
-                        onFinishFailed={onFinishFailed}
+                      
                     >
 
                         <Form.Item
@@ -93,8 +95,8 @@ function Login() {
                                   }
                                 type="primary" htmlType="submit" className="submit">
                                 <Link to="/mainwall/mainwall">
-                                   Log in
-                                </Link> 
+                             
+                                </Link>       Log in
                             </Button> )} 
                                    
                                </Form.Item> Or <Link to="/register/register">register now!</Link>
