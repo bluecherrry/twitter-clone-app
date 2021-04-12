@@ -1,0 +1,18 @@
+.widgets {
+    flex: 0.3;
+  }
+  
+  .widgets__input {
+    display: flex;
+    align-items: center;
+    background-color:  rgb(115, 181, 223);
+    padding: 10px;
+    border-radius: 20px;
+    margin-top: 10px;
+    margin-left: 20px;
+  }
+  
+  .ant-input-group-wrapper {
+    border: none; border-radius: 20px;
+    background-color: rgba(29, 161, 242);
+  }

@@ -1,0 +1,52 @@
+.post {
+    display: flex;
+    align-items: flex-start;
+    border-bottom: 1px solid rgba(29, 161, 242);
+    padding-bottom: 10px;
+  }
+  
+  .post__body {
+    flex: 1;
+    padding: 10px;
+  }
+  
+  .post__body > img {
+    border-radius: 20px;
+    width: 500px;
+  }
+  
+  .post_footer {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 30px;
+    font-size: 22px;
+  
+  }
+  .post_footer span:hover{
+      color: rgba(29, 161, 242); 
+       cursor: pointer;
+  }
+  .post_headerDescription {
+    margin-bottom: 14px;
+    font-size: 17px;
+  }
+  
+  .post_headerText > h3 {
+    font-size: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .post_badge {
+    font-size: 14px !important;
+    color:  rgba(29, 161, 242);
+  }
+  
+  .post_headerSpecial {
+    font-weight: 600;
+    font-size: 20px;
+    color: gray;
+  }
+  
+  .post_avatar {
+    padding: 13px;
+  }

@@ -1,0 +1,170 @@
+ .twitter-icon-header{
+  margin-top:20px;
+   text-align: center;
+}
+.twitter-icon{
+ color:rgb(29,161,242) ;
+   font-size: 40px;
+}
+.sidebarOption {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    padding-right: 3rem;
+  }
+  
+  .sidebarOption:hover {
+    background-color: #e8f5fe;
+    border-radius: 30px;
+    color:rgb(29,161,242) ;
+    transition: color 100ms ease-out;
+  }
+  
+  .sidebarOption > .MuiSvgIcon-root {
+    padding: 20px;
+  }
+  
+  .sidebarOption > h2 {
+    font-weight: 900;
+    font-size: 20px;
+    margin-right: 20px;
+    padding: 28px;
+    
+  }
+  
+  .sidebarOption--active {
+    color: rgb(29,161,242) ;
+  }
+  .sidebar {
+    border-right: 1px solid rgb(29,161,242) ;
+    flex: 0.3;
+    /* min-width: 250px; */
+    margin-top: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+     background-color: rgb(255, 255, 255);
+  }
+  .sidebar aside{
+    background-color: rgb(255, 255, 255);
+      text-align: center;
+      position: relative;
+      height: 100vh;
+      border-right: 1px solid rgba(29, 160, 242, 0.671) ;
+      left: 18.4%;
+  }
+
+  .sidebar .ant-layout-sider-children span{
+font-size: 25px;
+padding: 10px;
+font-weight: 900 !important;
+  }
+
+ 
+  .sidebar__twitterIcon {
+    color: rgb(29,161,242) ;
+    font-size: 60px !important;
+    margin-left: 50%;
+    margin-bottom: 20px;
+    
+  }
+  
+  .sidebar__tweet {
+    background-color: rgb(29,161,242)  !important;
+    border: none !important;
+    color: white !important;
+    font-weight: 900 !important;
+    text-transform: inherit !important;
+    border-radius: 30px !important;
+    height: 50px !important;
+    margin-top: 20px !important;
+  }
+
+  @media only screen and (max-width: 400px){
+   .sidebar{
+       border: none;
+      
+   }
+  
+   .sidebar button{
+       border-radius: 50%;
+   }
+.sidebar .ant-layout-sider-children{
+    position: fixed;
+    left: 0;
+   
+}
+}
+/*.ant-layout-sider .ant-layout-sider-dark .slider {
+overflow: auto;
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    width:100%;
+    text-align: center;
+
+}
+.ant-layout-sider-children{
+   width: 100%;  
+    background: white;
+}
+.ant-menu .ant-menu-light .menu-slider .ant-menu-root .ant-menu-inline{
+    margin-top: 30px;
+}
+.ant-menu{
+    height: 100vh; 
+}
+.ant-menu-inline > .ant-menu-item {
+    height:80px;
+}
+.menu-slider{
+    text-align: center;
+}
+  .menu-slider li{
+      font-size: 24px;
+      font-weight: 700;
+      
+     }
+  .menu-slider li span {
+     
+      padding: 30px;
+  }
+  .ant-menu-inline .ant-menu-item:not(:last-child) {
+    margin-bottom: 20px;
+    margin-top: 25px;
+}
+
+.ant-menu-item .ant-menu-item-icon{
+    font-size: 25px; font-weight: 900;
+}
+.slider .menu-slider li button{
+    padding: 15px;
+    border-radius: 20px;
+    position: relative;
+    
+    top: 1rem;
+height: 4rem;
+width: 100%;
+   
+}
+.ant-layout {
+    display: flex;
+    flex: auto;
+    flex-direction: column;
+    min-height: 0;
+    text-align: center;
+    background: #ffffff;
+}
+.slider .ant-btn > span {
+    display: inline;
+    color: white;
+    font-size: 18px;
+    font-weight: 800;
+}
+@media only screen and (max-width: 1300px){
+    .menu-slider li span {
+        padding: 0;
+    }
+    .slider .menu-slider li button{
+        display: none;
+    }   
+} */

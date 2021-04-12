@@ -1,0 +1,9 @@
+.site-layout-sub-header-background{
+    background-color: rgb(255, 255, 255);
+    font-size: 30px;
+    font-weight: 900;
+    
+}
+.divider{
+    border-bottom: 1px solid rgba(128, 128, 128, 0.548);
+}

@@ -10,5 +10,6 @@ import "firebase/auth"
     measurementId:process.env.REACT_APP_FIREBASE_MEASUREMENT_ID
   };
   const fire= firebase.initializeApp(firebaseConfig);
-export const auth = fire.auth()
+export const auth = fire.auth();
+export const database = fire.firestore();
 export default fire
