@@ -7,6 +7,7 @@ import { database } from '../../../firebase/firebase'
 
 function Feed(props) {
     const [posts, setPosts] = useState([])
+    
     useEffect(() => {
         database.collection('posts').onSnapshot(snapshot => (
             setPosts(snapshot.docs.map(doc => doc.data()))
@@ -24,9 +25,9 @@ function Feed(props) {
             <div >
                 <Content>
                     <TweetBox />
-                    {posts.map(posts => (
+                    {posts.map((posts,index) => (
                         <Post
-                            key={posts.text}
+                            key={index}//document iD firebase
 
                             image={posts.image}
 

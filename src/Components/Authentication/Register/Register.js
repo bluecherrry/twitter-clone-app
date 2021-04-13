@@ -1,12 +1,12 @@
-import React, { useRef } from 'react'
+import React, { useRef, useState } from 'react'
 import { Link} from 'react-router-dom'
 import { Input, Form, Button, Row, Col, Card } from 'antd'
 import { useAuth } from '../../../Context/AuthContext'
-import axios from 'axios';
-
+import createUserDocumnet from '../../../firebase/firebase'
+import axios from 'axios'
 
 function RegisterForm(props) {
-  
+    const[displayName,setDisplayName]=useState("")
     const [form] = Form.useForm();
     
     //ref
@@ -18,12 +18,13 @@ function RegisterForm(props) {
     //context 
     const { signup } = useAuth()
 
-    const onFinish= async(value ) => {
-     await signup(emailRef.current.state.value, passwordRef.current.state.value)
+    const onFinish= (value ) => {
+      signup(usernameRef.current.state.value,emailRef.current.state.value, passwordRef.current.state.value)
       axios.post(`https://twitter-app-ddf5b-default-rtdb.firebaseio.com/userName.json`,value)
-      .then((response) => console.log(response))
-    
-}
+    .then((res) =>console.log(res,"res"))
+       
+}  
+ // console.log(usernameRef.current.state.value,"register");
 
     return (
         <Row justify="center" className="register">
@@ -143,9 +144,9 @@ function RegisterForm(props) {
                                     }
                                 >
                                     <Link to="/policy/agreement">
-                              sign up
+                           sign up
                                     </Link>
-                                          
+                                             
                                 </Button>
                             )}
                         </Form.Item>

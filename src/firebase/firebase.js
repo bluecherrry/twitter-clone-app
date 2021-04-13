@@ -12,4 +12,8 @@ import "firebase/auth"
   const fire= firebase.initializeApp(firebaseConfig);
 export const auth = fire.auth();
 export const database = fire.firestore();
+export const storage = fire.storage();
+
+
+
 export default fire
