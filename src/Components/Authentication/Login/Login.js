@@ -11,40 +11,34 @@ function Login() {
     const passwordRef = useRef()
     //context 
     const { login } = useAuth()
+    const { getCurrentUsername } = useAuth()
     //usestate
-    const [httpStatusCode, setHttpStatusCode] = useState();
-    const [showLoader, setShowLoader] = useState(false);
-    const [loading, setLoading] = useState(false);
+    const [isButtonLoading, setIsButtonLoading] = useState(false);
+
+    
     const onFinish = (value) => {
         login(emailRef.current.state.value, passwordRef.current.state.value)
-    .then(value => value.json())
-    .then(() => console.log(value))
-    
+   
+        .then(() => console.log(value,"value"))
+        localStorage.setItem('user',JSON.stringify(value))
+        console.log(localStorage,"local");
+      
     };
     const handleLoading = () => {
-        setLoading(true);
-        setTimeout(() => {
-        setLoading(false);
-        }, 3000)
-    }
+        setIsButtonLoading(true);
+             const timeout = setTimeout(() => {
+                 setIsButtonLoading(false);
+             }, 2000);
+             
+             return () => {
+                 clearTimeout(timeout);
+             };
+         }
     const [, forceUpdate] = useState({});
     // To disable submit button at the beginning.
     useEffect(() => {
        forceUpdate({});
-        if (loading) {
-            setShowLoader(true);
-        }
-         // Show loader a bits longer to avoid loading flash
-        if (!loading && showLoader) {
-            const timeout = setTimeout(() => {
-                setShowLoader(false);
-            }, 400);
-            //clear the timeout
-            return () => {
-                clearTimeout(timeout);
-            };
-        }
-        }, []);
+    }, []);
     return (
         <Row justify="center" className="register">
             <Col xs={24} xl={12} className="register-col">
@@ -101,8 +95,8 @@ function Login() {
                         <Form.Item shouldUpdate>
                             {() => (
                                 <Button
-                                    onClick={handleLoading}
-                                    loading={showLoader}
+                                    onClick={() => handleLoading}
+                                    loading={isButtonLoading}
                                     disabled={
                                         !form.isFieldsTouched(true) ||
                                         !!form.getFieldsError().filter(({ errors }) => errors.length).length
@@ -111,8 +105,8 @@ function Login() {
                                     htmlType="submit"
                                     className="submit">
                                     <Link to="/mainwall/mainwall">
-                                         Log in
-                                    </Link>   
+                                       Log in 
+                                    </Link>    
                                 </Button>)}
 
                         </Form.Item> Or <Link to="/register/register">register now!</Link>

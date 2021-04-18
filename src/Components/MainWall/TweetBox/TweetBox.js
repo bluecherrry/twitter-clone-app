@@ -18,18 +18,15 @@ function TweetBox(props) {
             .then((res) => {
                console.log(res,"res");
             })
-            .catch((e) => {
-                if(e.response) {
-                    console.log(e.response.data,"data");
-                    console.log(e.response.status,"status");
-                    console.log(e.response.headers,"headers");
-                }
-            })
+           
         }
         fetchData()
         auth.onAuthStateChanged((user) => {
+             const loggedInUser =  localStorage.getItem("user")
             if (user != null) {
                 console.log("signed in", getCurrentUsername())
+           //     const foundUser = JSON.parse(loggedInUser)
+              //  console.log(localStorage,"local");
             }
             else {
                 console.log("state = definitely signed out")

@@ -19,9 +19,7 @@ function RegisterForm(props) {
     //context 
     const { signup } = useAuth()
     //usestate
-    const [showLoader, setShowLoader] = useState(false);
-    const [loading, setLoading] = useState(false);
-    const [isButtonLoading, setIsButtonLoading] = React.useState(false);
+    const [isButtonLoading, setIsButtonLoading] = useState(false);
 
     const onFinish= (value ) => {
       signup(usernameRef.current.state.value,emailRef.current.state.value, passwordRef.current.state.value)
@@ -167,9 +165,9 @@ const handleLoading = () => {
                                     }
                                 >
                                  <Link to="/policy/agreement">
-                           
+                           sign up 
                                 </Link>
-                                       sign up          
+                                                
                                 </Button>
                             )}
                         </Form.Item>

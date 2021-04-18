@@ -15,16 +15,16 @@ function Feed(props) {
             setPosts(snapshot.docs.map(doc => doc.data()))
         ))
     }, [])
-    const logoutuser = async () =>{
-        await logout();
+    const logoutuser = () =>{
+       logout();
     }
     let history = useHistory();
     const redirect = () => {
      history.push('/')
    }
    if(getCurrentUsername()== null) {
+      
     // not logged in
-    
    history.replace('/login/login')
     return null
 }
@@ -35,7 +35,7 @@ function Feed(props) {
             <div  >
                 <Header className="site-layout-sub-header-background" style={{ padding: 0 }}>
                     Home
-               
+
                 <Button
                         type="submit"
                         fullWidth

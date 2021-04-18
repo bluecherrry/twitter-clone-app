@@ -23,8 +23,14 @@ export function AuthProvider({ children }) {
    async function login(email, password) {
         await auth.signInWithEmailAndPassword(email, password)
     }
-    function logout() {
-        return auth.signOut()
+    async function logout() {
+         await auth.signOut();
+         auth.onAuthStateChanged((user)=>{
+         setCurrentUser(false)
+         localStorage.clear() 
+         console.log(currentUser,"current user");  
+         })
+          
     }
     function getCurrentUsername() {
         return auth.currentUser && auth.currentUser.displayName
