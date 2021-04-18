@@ -5,14 +5,14 @@
   .widgets__input {
     display: flex;
     align-items: center;
-    background-color:  rgb(115, 181, 223);
+    background-color:  rgb(255, 255, 255);
     padding: 10px;
     border-radius: 20px;
     margin-top: 10px;
     margin-left: 20px;
   }
   
-  .ant-input-group-wrapper {
-    border: none; border-radius: 20px;
-    background-color: rgba(29, 161, 242);
+  .widgets__input span .ant-input-affix-wrapper {
+    border:1px solid grey; border-radius: 20px;
+    color: rgb(6, 91, 143);
   }

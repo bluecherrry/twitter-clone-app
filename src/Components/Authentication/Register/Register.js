@@ -6,7 +6,8 @@ import createUserDocumnet from '../../../firebase/firebase'
 import axios from 'axios'
 
 function RegisterForm(props) {
-    const[displayName,setDisplayName]=useState("")
+
+
     const [form] = Form.useForm();
     
     //ref
@@ -17,14 +18,34 @@ function RegisterForm(props) {
     const passwordConfirmRef = useRef()
     //context 
     const { signup } = useAuth()
+    //usestate
+    const [showLoader, setShowLoader] = useState(false);
+    const [loading, setLoading] = useState(false);
+    const [isButtonLoading, setIsButtonLoading] = React.useState(false);
 
     const onFinish= (value ) => {
       signup(usernameRef.current.state.value,emailRef.current.state.value, passwordRef.current.state.value)
       axios.post(`https://twitter-app-ddf5b-default-rtdb.firebaseio.com/userName.json`,value)
-    .then((res) =>console.log(res,"res"))
-       
+      .then((res) =>{
+         console.log(res);
+      }
+     )
+        .catch((error)=>{
+             console.log(error,"error");
+           }
+        )
 }  
- // console.log(usernameRef.current.state.value,"register");
+const handleLoading = () => {
+   setIsButtonLoading(true);
+        const timeout = setTimeout(() => {
+            setIsButtonLoading(false);
+        }, 2000);
+        
+        return () => {
+            clearTimeout(timeout);
+        };
+    }
+    
 
     return (
         <Row justify="center" className="register">
@@ -134,6 +155,8 @@ function RegisterForm(props) {
                         <Form.Item shouldUpdate className="submit">
                             {() => (
                                 <Button
+                                onClick={handleLoading}
+                                loading={isButtonLoading}
                                 className="register-btn"
                                     type="primary"
                                     htmlType="submit"
@@ -143,10 +166,10 @@ function RegisterForm(props) {
                                             .length > 0
                                     }
                                 >
-                                    <Link to="/policy/agreement">
-                           sign up
-                                    </Link>
-                                             
+                                 <Link to="/policy/agreement">
+                           
+                                </Link>
+                                       sign up          
                                 </Button>
                             )}
                         </Form.Item>

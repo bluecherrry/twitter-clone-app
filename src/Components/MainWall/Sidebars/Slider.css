@@ -72,99 +72,24 @@ font-weight: 900 !important;
     background-color: rgb(29,161,242)  !important;
     border: none !important;
     color: white !important;
-    font-weight: 900 !important;
+    font-weight: 500 !important;
     text-transform: inherit !important;
-    border-radius: 30px !important;
-    height: 50px !important;
+    border-radius: 25px !important;
+    height: 70px !important;
     margin-top: 20px !important;
+    margin-left: 10px;
   }
 
-  @media only screen and (max-width: 400px){
-   .sidebar{
-       border: none;
-      
+  /* @media (max-width: 440px){
+  
+   .sidebar__tweet{
+background-color: saddlebrown;
+
    }
   
-   .sidebar button{
-       border-radius: 50%;
-   }
 .sidebar .ant-layout-sider-children{
     position: fixed;
     left: 0;
    
 }
-}
-/*.ant-layout-sider .ant-layout-sider-dark .slider {
-overflow: auto;
-    height: 100vh;
-    position: fixed;
-    left: 0;
-    width:100%;
-    text-align: center;
-
-}
-.ant-layout-sider-children{
-   width: 100%;  
-    background: white;
-}
-.ant-menu .ant-menu-light .menu-slider .ant-menu-root .ant-menu-inline{
-    margin-top: 30px;
-}
-.ant-menu{
-    height: 100vh; 
-}
-.ant-menu-inline > .ant-menu-item {
-    height:80px;
-}
-.menu-slider{
-    text-align: center;
-}
-  .menu-slider li{
-      font-size: 24px;
-      font-weight: 700;
-      
-     }
-  .menu-slider li span {
-     
-      padding: 30px;
-  }
-  .ant-menu-inline .ant-menu-item:not(:last-child) {
-    margin-bottom: 20px;
-    margin-top: 25px;
-}
-
-.ant-menu-item .ant-menu-item-icon{
-    font-size: 25px; font-weight: 900;
-}
-.slider .menu-slider li button{
-    padding: 15px;
-    border-radius: 20px;
-    position: relative;
-    
-    top: 1rem;
-height: 4rem;
-width: 100%;
-   
-}
-.ant-layout {
-    display: flex;
-    flex: auto;
-    flex-direction: column;
-    min-height: 0;
-    text-align: center;
-    background: #ffffff;
-}
-.slider .ant-btn > span {
-    display: inline;
-    color: white;
-    font-size: 18px;
-    font-weight: 800;
-}
-@media only screen and (max-width: 1300px){
-    .menu-slider li span {
-        padding: 0;
-    }
-    .slider .menu-slider li button{
-        display: none;
-    }   
 } */

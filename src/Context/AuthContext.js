@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { auth, database } from '../firebase/firebase'
+import { auth, database,timeStamp } from '../firebase/firebase'
 
 const AuthContext = React.createContext()
 
@@ -20,13 +20,8 @@ export function AuthProvider({ children }) {
 
     }
 
-    //firebase method 
-    // auth.onAuthStateChanged(user => {
-    //     setCurrentUser(user)
-    //     //null or user//  //useEffect//  //it should be run when our component is mount 
-    // })
-    function login(email, password) {
-        return auth.signInWithEmailAndPassword(email, password)
+   async function login(email, password) {
+        await auth.signInWithEmailAndPassword(email, password)
     }
     function logout() {
         return auth.signOut()
@@ -34,7 +29,18 @@ export function AuthProvider({ children }) {
     function getCurrentUsername() {
         return auth.currentUser && auth.currentUser.displayName
     }
-
+    function resetPassword(email) {
+        return auth.sendPasswordResetEmail(email)
+      }
+    
+      function updateEmail(email) {
+        return currentUser.updateEmail(email)
+      }
+    
+      function updatePassword(password) {
+        return currentUser.updatePassword(password)
+      }
+  
     useEffect(() => {
         const unsubscribe = auth.onAuthStateChanged(user => {
             setCurrentUser(user)
@@ -48,12 +54,13 @@ export function AuthProvider({ children }) {
         login,
         signup,
         logout,
-        getCurrentUsername
+        getCurrentUsername,
+      //  getPosts
 
     }
     return (
         <AuthContext.Provider value={value}>
-            {children}
+            {!loading && children}
         </AuthContext.Provider>
     )
 }

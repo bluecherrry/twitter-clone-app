@@ -9,21 +9,22 @@ import MailOutlineIcon from "@ant-design/icons/MailOutlined";
 import ListAltIcon from "@ant-design/icons/OrderedListOutlined";
 import MoreHorizIcon from "@ant-design/icons/MoreOutlined";
 import { Button, Layout, Menu } from "antd";
+import { Link } from "react-router-dom";
 
 function Sidebar() {
-    const {  Sider } = Layout;
+    const { Sider } = Layout;
 
     return (
         <div className="sidebar">
-            
+
             <Sider
                 style={{
                     overflow: 'hidden',
                     height: '100vh',
                     position: 'fixed',
-                  
+                    left: '0'
                 }}
-                breakpoint="lg"
+                breakpoint="sm"
                 collapsedWidth="60"
                 onBreakpoint={broken => {
                     console.log(broken);
@@ -32,17 +33,32 @@ function Sidebar() {
                     console.log(collapsed, type);
                 }}>
                 <Menu theme="light" mode="inline" defaultSelectedKeys={['4']}>
-                <TwitterIcon className="sidebar__twitterIcon" />
-                 
-                 
+                    <TwitterIcon className="sidebar__twitterIcon" />
+
+                    <Link to="/mainwall/mainwall">
                     <SidebarOption active Icon={HomeIcon} text="Home" />
+                    </Link>
+                    <Link to="/oops">
                     <SidebarOption Icon={SearchIcon} text="Explore" />
+                    </Link>
+                    <Link to="/oops">
                     <SidebarOption Icon={NotificationsNoneIcon} text="Notifications" />
+                    </Link>
+                    <Link to="/oops">
                     <SidebarOption Icon={MailOutlineIcon} text="Messages" />
 
+                    </Link>
+                    <Link to="/oops">
                     <SidebarOption Icon={ListAltIcon} text="Lists" />
 
+                    </Link>
+                    <Link to="/oops">
                     <SidebarOption Icon={MoreHorizIcon} text="More" />
+
+                    </Link>
+                    
+
+
                     {/* Button -> Tweet */}
                     <Button variant="outlined" className="sidebar__tweet" fullWidth>
                         Tweet

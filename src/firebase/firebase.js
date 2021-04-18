@@ -13,7 +13,7 @@ import "firebase/auth"
 export const auth = fire.auth();
 export const database = fire.firestore();
 export const storage = fire.storage();
-
+//export const timeStamp = fire.timeStamp()
 
 
 export default fire
