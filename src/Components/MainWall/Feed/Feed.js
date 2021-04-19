@@ -4,6 +4,7 @@ import './feed.css'
 import TweetBox from '../TweetBox/TweetBox';
 import Post from '../Post/Post';
 import { database } from '../../../firebase/firebase'
+import firebase from 'firebase'
 import { useAuth } from '../../../Context/AuthContext'
 import { useHistory } from 'react-router-dom'
 function Feed(props) {
@@ -15,10 +16,17 @@ function Feed(props) {
 
     useEffect(() => {
         async function fetchPost() {
+            const collectionRef = firebase.database().ref('posts');
             try {
                 database.collection('posts').onSnapshot(snapshot => (
                     setPosts(snapshot.docs.map(doc => doc.data()))
                 ))
+               collectionRef.on('value', snapshot => {
+                snapshot.val();
+                console.log(snapshot,"ref")
+              }, error => {
+                  console.error(error,"errororooror");
+              }); 
             }
             catch(e){
                console.log(e,"eroro");
@@ -30,8 +38,7 @@ function Feed(props) {
     const logoutuser = () => {
         setError("")
         logout();
-        history.push("/login/login")
-            .catch((e) => console.log(e, "error logout"))
+        localStorage.clear()
     }
     let history = useHistory();
     const redirect = () => {

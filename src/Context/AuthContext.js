@@ -25,15 +25,13 @@ export function AuthProvider({ children }) {
    async function login(email, password) {
      let response = await auth.signInWithEmailAndPassword(email, password)
    .then((response) => console.log(response,"response login"))
-   .catch((e)=> setError(e.message))
+   .catch((e)=> console.log(e.message))
 
     }
     async function logout() {
          await auth.signOut();
-        
-        //  setCurrentUser(user)
-        //   console.log(user,"user log out"); 
-          //console.log(currentUser,"current user");  
+          console.log("user log out"); 
+          console.log(currentUser,"current user");  
         
           
     }
