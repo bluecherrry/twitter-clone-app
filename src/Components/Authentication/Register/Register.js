@@ -2,7 +2,6 @@ import React, { useRef, useState } from 'react'
 import { Link} from 'react-router-dom'
 import { Input, Form, Button, Row, Col, Card } from 'antd'
 import { useAuth } from '../../../Context/AuthContext'
-import createUserDocumnet from '../../../firebase/firebase'
 import axios from 'axios'
 
 function RegisterForm(props) {

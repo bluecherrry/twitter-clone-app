@@ -10,6 +10,8 @@ export function useAuth() {
 export function AuthProvider({ children }) {
     const [currentUser, setCurrentUser] = useState() //no user
     const [loading, setLoading] = useState(true)
+    const [error ,setError] = useState("")
+
 
     async function signup(username, email, password) {
         await auth.createUserWithEmailAndPassword(email, password)
@@ -21,15 +23,18 @@ export function AuthProvider({ children }) {
     }
 
    async function login(email, password) {
-        await auth.signInWithEmailAndPassword(email, password)
+     let response = await auth.signInWithEmailAndPassword(email, password)
+   .then((response) => console.log(response,"response login"))
+   .catch((e)=> setError(e.message))
+
     }
     async function logout() {
          await auth.signOut();
-         auth.onAuthStateChanged((user)=>{
-         setCurrentUser(false)
-         localStorage.clear() 
-         console.log(currentUser,"current user");  
-         })
+        
+        //  setCurrentUser(user)
+        //   console.log(user,"user log out"); 
+          //console.log(currentUser,"current user");  
+        
           
     }
     function getCurrentUsername() {

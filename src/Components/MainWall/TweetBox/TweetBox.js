@@ -25,8 +25,8 @@ function TweetBox(props) {
              const loggedInUser =  localStorage.getItem("user")
             if (user != null) {
                 console.log("signed in", getCurrentUsername())
-           //     const foundUser = JSON.parse(loggedInUser)
-              //  console.log(localStorage,"local");
+                JSON.parse(loggedInUser)
+                console.log(localStorage,"local");
             }
             else {
                 console.log("state = definitely signed out")

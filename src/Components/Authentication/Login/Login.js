@@ -1,8 +1,9 @@
 import React, { useState, useRef, useEffect } from 'react'
-import { Button, Form, Checkbox, Input, Row, Card, Col, Alert } from 'antd'
+import { Button, Form,  Input, Row, Card, Col, Alert } from 'antd'
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import { Link, useHistory } from 'react-router-dom'
 import { useAuth } from '../../../Context/AuthContext'
+import { database, auth } from './../../../firebase/firebase'
 
 function Login() {
     const [form] = Form.useForm();
@@ -14,21 +15,29 @@ function Login() {
     const { getCurrentUsername } = useAuth()
     //usestate
     const [isButtonLoading, setIsButtonLoading] = useState(false);
+    const [error, setError] = useState("")
 
     
     const onFinish = (value) => {
+     try  {
         login(emailRef.current.state.value, passwordRef.current.state.value)
-   
-        .then(() => console.log(value,"value"))
         localStorage.setItem('user',JSON.stringify(value))
-        console.log(localStorage,"local");
+        console.log(localStorage,"local")
+        auth.onAuthStateChanged((user) => {
+         console.log(user.displayName,"user status");
+        })
+        setError("")}
+        catch{ setError("Failed to log in")
+         //console.log(error);
+    }
+        
       
     };
     const handleLoading = () => {
         setIsButtonLoading(true);
              const timeout = setTimeout(() => {
                  setIsButtonLoading(false);
-             }, 2000);
+             }, 6000);
              
              return () => {
                  clearTimeout(timeout);
@@ -44,6 +53,7 @@ function Login() {
             <Col xs={24} xl={12} className="register-col">
                 <Card title="Log In"
                     className="card-register">
+                         {error && <Alert variant="danger" message={error}/>}
                     <Form
                         form={form}
                         name="normal_login"
@@ -95,7 +105,7 @@ function Login() {
                         <Form.Item shouldUpdate>
                             {() => (
                                 <Button
-                                    onClick={() => handleLoading}
+                                    onClick={handleLoading}
                                     loading={isButtonLoading}
                                     disabled={
                                         !form.isFieldsTouched(true) ||
@@ -105,8 +115,8 @@ function Login() {
                                     htmlType="submit"
                                     className="submit">
                                     <Link to="/mainwall/mainwall">
-                                       Log in 
-                                    </Link>    
+                                       Log in  
+                                    </Link>   
                                 </Button>)}
 
                         </Form.Item> Or <Link to="/register/register">register now!</Link>
