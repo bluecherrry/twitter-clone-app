@@ -37,8 +37,9 @@ function Feed(props) {
     }, [])
     const logoutuser = () => {
         setError("")
+       
         logout();
-        localStorage.clear()
+        
     }
     let history = useHistory();
     const redirect = () => {
@@ -62,7 +63,7 @@ function Feed(props) {
                         fullWidth
                         variant="contained"
                         color="secondary"
-                        onClick={logoutuser}
+                        onClick={logoutuser?redirect:""}
                     >
                         Logout
           		</Button>

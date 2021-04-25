@@ -19,20 +19,13 @@ function Login() {
 
     
     const onFinish = (value) => {
-     try  {
-        login(emailRef.current.state.value, passwordRef.current.state.value)
-        localStorage.setItem('user',JSON.stringify(value))
+        login(emailRef.current.state.value, passwordRef.current.state.value)  
         console.log(localStorage,"local")
-        auth.onAuthStateChanged((user) => {
-         console.log(user.displayName,"user status");
-        })
-        setError("")}
-        catch{ setError("Failed to log in")
+        
+        setError("")
+       // catch{ setError("Failed to log in")
          //console.log(error);
     }
-        
-      
-    };
     const handleLoading = () => {
         setIsButtonLoading(true);
              const timeout = setTimeout(() => {
@@ -115,7 +108,7 @@ function Login() {
                                     htmlType="submit"
                                     className="submit">
                                     <Link to="/mainwall/mainwall">
-                                       Log in  
+                                        Log in 
                                     </Link>   
                                 </Button>)}
 
