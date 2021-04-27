@@ -1,6 +1,6 @@
 import React,{useEffect,useState} from 'react'
 import axios from 'axios';
-import { database } from '../../../firebase/firebase';
+import { database } from '../../../../firebase/firebase';
 
 function DataTable() {
     const[users,setUsers] = useState(null);

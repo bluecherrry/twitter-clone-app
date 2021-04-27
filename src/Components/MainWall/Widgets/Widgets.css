@@ -16,3 +16,8 @@
     border:1px solid grey; border-radius: 20px;
     color: rgb(6, 91, 143);
   }
+  .search-user{
+    width: 500px;
+    height: 10rem;
+    background-color: sandybrown;
+  }

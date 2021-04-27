@@ -8,6 +8,7 @@ import NotificationsNoneIcon from "@ant-design/icons/NotificationOutlined";
 import MailOutlineIcon from "@ant-design/icons/MailOutlined";
 import ListAltIcon from "@ant-design/icons/OrderedListOutlined";
 import MoreHorizIcon from "@ant-design/icons/MoreOutlined";
+import UserOutlined  from "@ant-design/icons/UserOutlined";
 import { Button, Layout, Menu } from "antd";
 import { Link } from "react-router-dom";
 
@@ -36,27 +37,30 @@ function Sidebar() {
                     <TwitterIcon className="sidebar__twitterIcon" />
 
                     <Link to="/mainwall/mainwall">
-                    <SidebarOption active Icon={HomeIcon} text="Home" />
+                        <SidebarOption active Icon={HomeIcon} text="Home" />
+                    </Link>
+                    <Link to="/mainwall/profile">
+                        <SidebarOption Icon={UserOutlined } text="Profile" />
                     </Link>
                     <Link to="/oops">
-                    <SidebarOption Icon={SearchIcon} text="Explore" />
+                        <SidebarOption Icon={SearchIcon} text="Explore" />
                     </Link>
                     <Link to="/oops">
-                    <SidebarOption Icon={NotificationsNoneIcon} text="Notifications" />
+                        <SidebarOption Icon={NotificationsNoneIcon} text="Notifications" />
                     </Link>
                     <Link to="/oops">
-                    <SidebarOption Icon={MailOutlineIcon} text="Messages" />
+                        <SidebarOption Icon={MailOutlineIcon} text="Messages" />
 
                     </Link>
                     <Link to="/oops">
-                    <SidebarOption Icon={ListAltIcon} text="Lists" />
+                        <SidebarOption Icon={ListAltIcon} text="Lists" />
 
                     </Link>
                     <Link to="/oops">
-                    <SidebarOption Icon={MoreHorizIcon} text="More" />
+                        <SidebarOption Icon={MoreHorizIcon} text="More" />
 
                     </Link>
-                    
+
 
 
                     {/* Button -> Tweet */}

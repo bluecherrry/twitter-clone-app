@@ -22,7 +22,7 @@ function RegisterForm(props) {
 
     const onFinish= (value ) => {
       signup(usernameRef.current.state.value,emailRef.current.state.value, passwordRef.current.state.value)
-     let uservalue = usernameRef.current.state.value;
+     
       axios.post(`https://twitter-app-ddf5b-default-rtdb.firebaseio.com/users.json`,value)
       .then((res) =>{
          console.log(res);

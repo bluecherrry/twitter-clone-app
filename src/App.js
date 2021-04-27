@@ -11,6 +11,7 @@ import MainWall from './Components/MainWall/MainWall';
 import { AuthProvider } from './Context/AuthContext';
 import InternalServer from './Components/exception/InternalServer';
 import NotFound from './Components/exception/NotFound/NotFound.js'
+import Profile from './Components/MainWall/Profile/Profile';
 function App() {
   return (
     <AuthProvider>
@@ -24,6 +25,7 @@ function App() {
           <Route path="/login" component={Login}/>
           <Route path="/policy/agreement" component={Agreement}/>
           <Route path="/mainwall/mainwall" component={MainWall}/>
+          <Route path="/mainwall/profile" component={Profile}/>
           <Route path="/500" component={InternalServer}/>
           <Route component={NotFound}/>
           
