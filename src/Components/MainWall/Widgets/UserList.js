@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import firebase from 'firebase'
-import { Button,AutoComplete } from 'antd';
+import { Button,AutoComplete,Select,Space } from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
 import Follow from './Follow';
 function UserList() {
@@ -51,16 +51,18 @@ function UserList() {
 
     const onSelect = (data) => {
         console.log('onSelect', data);
+        
       };
+
     
     const optionslist = allusers.map((d, ind) =>
-    
+
         <Option key={ind} value={d.userName}>
             {d.userName}
         </Option>)
     return (
         <div className="search-user">
-
+{/* 
             <AutoComplete
                 allowClear={true}
                 dropdownClassName="certain-category-search-dropdown"
@@ -81,25 +83,25 @@ function UserList() {
                
             </AutoComplete>
             <Button><SearchOutlined /></Button>
-            <p>
-                {value? <Follow name={value}/> : ""}
-            </p>
-            {/* <Space>
+            */}
+             
                 <Select
                     suffixIcon={<SearchOutlined />}
                     placeholder="search users"
                     style={{ width: '300px' }}
                     value={value}
-                    onSearch={onSearch}
+                    onSearch={handleSearch}
                     onChange={handleChange}
                     showSearch
                     filterOption={false}
                     notFoundContent={null}
                     defaultActiveFirstOption={false} >
-                    {options}
+                    {optionslist}
                 </Select>
-            </Space> */}
-
+         
+            <p>
+                {value? <Follow name={value} /> : ""}
+            </p>
 
         </div>
     )
