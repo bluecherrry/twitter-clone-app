@@ -1,83 +1,71 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { auth, database,timeStamp } from '../firebase/firebase'
+import Parse from 'parse/dist/parse.min.js';
+
+Parse.initialize("TWITTER_ID", "");
+Parse.serverURL = 'http://localhost:1337/parse'
 
 const AuthContext = React.createContext()
-
+const user = new Parse.User();
 
 export function useAuth() {
-    return useContext(AuthContext)
+  return useContext(AuthContext)
 }
 export function AuthProvider({ children }) {
-    const [currentUser, setCurrentUser] = useState() //no user
-    const [loading, setLoading] = useState(true)
-    const [error ,setError] = useState("")
-    async function signup(username, email, password) {
-        await auth.createUserWithEmailAndPassword(email, password)
-        return auth.currentUser.updateProfile({
-            displayName: username
-        })
-        //promise //register.js //resolve//reject
+  const [currentUser, setCurrentUser] = useState() //no user
+  const [loading, setLoading] = useState(false)
+  const CurrentUser = Parse.User.current();
+  async function signup(username, password, email) {
+    console.log(email);
+    user.set("username", username);
+    user.set("password", password);
+    user.set("email", email);
+    try {
+      await user.signUp();
+      console.log("success")
+    } catch (error) {
+      console.log(error, "sign up error");
     }
-   async function login(email, password) {
-     let response = await auth.signInWithEmailAndPassword(email, password)
-   .then((response) => {
-    localStorage.setItem('user',JSON.stringify(value))
-    console.log(response,"response login")})
-   .catch((e)=> console.log(e.message))
+  }
+  async function login(email, password) {
+    var user = Parse.User
+      .logIn(email, password).then(function (user) {
+        console.log('User created successful with name: ' + user.get("username") + ' and email: ' + user.get("email"));
+      }).catch(function (error) {
+        console.log("Error: " + error.code + " " + error.message);
+      });
+  }
+  async function logout() {
+    Parse.User.logOut().then(() => {
+      console.log("logged out");
+      // this will now be null
+    });
 
-    }
-    async function logout() {
-         await auth.signOut()
-         auth.GoogleSignInApi.signOut()
-         .then(() =>{
-           localStorage.clear()  
-          console.log(localStorage,"local log out");
-        }
-         )
-         .catch((e) => console.log(e , "error sign out "))
-           
-         
-          
-    }
-    function getCurrentUsername() {
-        return auth.currentUser && auth.currentUser.displayName
-    }
-    function resetPassword(email) {
-        return auth.sendPasswordResetEmail(email)
-      }
-    
-      function updateEmail(email) {
-        return currentUser.updateEmail(email)
-      }
-    
-      function updatePassword(password) {
-        return currentUser.updatePassword(password)
-      }
-  
-    useEffect(() => {
-        const unsubscribe = auth.onAuthStateChanged(user => {
-         
-          console.log(user,"current user");
-            setCurrentUser(user)
-            setLoading(false)
-        })
-        return unsubscribe //unmount
-    }, [])
 
-    const value = {
-        currentUser,
-        login,
-        signup,
-        logout,
-        getCurrentUsername,
-      //  getPosts
 
-    }
-    return (
-        <AuthContext.Provider value={value}>
-            {!loading && children}
-        </AuthContext.Provider>
-    )
+  }
+  function getCurrentUsername() {
+    return Parse.User.current()
+  }
+
+  useEffect(() => {
+    const unsubscribe = Parse.User.current()
+    return unsubscribe //unmount
+  }, [])
+
+  const value = {
+    currentUser,
+    login,
+    signup,
+    logout,
+    getCurrentUsername,
+    //  getPosts
+
+  }
+  return (
+    <AuthContext.Provider value={value}>
+      {children}
+    </AuthContext.Provider>
+  )
 }
 
 

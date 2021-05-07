@@ -3,43 +3,49 @@ import { Layout, Button, Alert } from 'antd';
 import './feed.css'
 import TweetBox from '../TweetBox/TweetBox';
 import Post from '../Post/Post';
-import { database } from '../../../firebase/firebase'
-import firebase from 'firebase'
+import Parse from 'parse/dist/parse.min.js';
 import { useAuth } from '../../../Context/AuthContext'
 import { useHistory } from 'react-router-dom'
+
+Parse.initialize("TWITTER_ID", "");
+Parse.serverURL = 'http://localhost:1337/parse'
+
+
 function Feed(props) {
     const [posts, setPosts] = useState([])
     const { logout } = useAuth()
     const { getCurrentUsername } = useAuth()
-
-    const [error, setError] = useState("")
-
-    useEffect(() => {
-        async function fetchPost() {
-            const collectionRef = firebase.database().ref('posts');
-            try {
-                database.collection('posts').onSnapshot(snapshot => (
-                    setPosts(snapshot.docs.map(doc => doc.data()))
-                ))
-               collectionRef.on('value', snapshot => {
-                snapshot.val();
-                console.log(snapshot,"ref")
-              }, error => {
-                  console.error(error,"errororooror");
-              }); 
-            }
-            catch(e){
-               console.log(e,"eroro");
-            }
-        };
-        fetchPost();
-
-    }, [])
-    const logoutuser = () => {
-        setError("")
-       
-        logout();
+    const fetchPosts = () => {
+        var Post = Parse.Object.extend("Post");
+        var query = new Parse.Query(Post);
+        query.include("user");
+        query.find()
+        .then(function (results) {
         
+                for (let i in results) {
+                /* Set obj to current post*/
+                var obj = results[i];
+                var postMsg = obj.get("postMsg");
+                var authorName = obj.get("user").get("username");
+                posts.push({
+                    post:{
+                       postMsg
+                    },
+                    author: authorName
+                });
+            }
+            setPosts([...posts])
+        })
+    }
+    console.log(posts);
+    useEffect(() => {
+        fetchPosts()
+      //  return () => console.log('unmounting...');
+
+    }  , [])
+
+    const logoutuser = () => {
+        logout();
     }
     let history = useHistory();
     const redirect = () => {
@@ -63,27 +69,23 @@ function Feed(props) {
                         fullWidth
                         variant="contained"
                         color="secondary"
-                        onClick={logoutuser?redirect:""}
+                        onClick={logoutuser ? redirect : ""}
                     >
                         Logout
           		</Button>
-                    {error && <Alert variant="danger">{error}</Alert>}
+
                 </Header>
             </div>
             <div >
+
                 <Content>
-                    <TweetBox />
+                    <TweetBox  />
                     {posts.map((posts, index) => (
+
                         <Post
                             key={index}//document iD firebase
-
-                            image={posts.image}
-                            createdAt={posts.createdAt}
-                            username={posts.username}
-                            avatar={posts.avatar}
-                            displayName={posts.displayName}
-                            text={posts.text}
-
+                            username={posts.author}
+                            text={posts.post.postMsg}
 
                         />
                     ))}

@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import firebase from 'firebase'
 import { Button,AutoComplete,Select,Space } from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
 import Follow from './Follow';
@@ -14,27 +13,27 @@ function UserList() {
     }
     const userList = async () => {
         try {
-            await firebase.database().ref('/userName')
-                .on("value", (datasnapshot) => {
-                    const uuid = firebase.auth().currentUser.uid
-                    console.log('uuid', uuid);
+            // await firebase.database().ref('/userName')
+            //     .on("value", (datasnapshot) => {
+            //         const uuid = firebase.auth().currentUser.uid
+            //         console.log('uuid', uuid);
 
-                    let users = [];
-                    datasnapshot.forEach((child) => {
-                        console.log(child.val().uid,"isjs");
-                        if (child.val().uuid === uuid) {
-                            console.log(child.val(),"child val");
-                        }
-                        else {
-                            users.push({
-                                userName: child.val().username,
-                                uuid: child.val().uuid
-                            })
-                        }
+            //         let users = [];
+            //         datasnapshot.forEach((child) => {
+            //             console.log(child.val().uid,"isjs");
+            //             if (child.val().uuid === uuid) {
+            //                 console.log(child.val(),"child val");
+            //             }
+            //             else {
+            //                 users.push({
+            //                     userName: child.val().username,
+            //                     uuid: child.val().uuid
+            //                 })
+            //             }
 
-                    })
-                    setAllUsers(users)
-                })
+            // //         })
+            //         setAllUsers(users)
+            //     })
         }
         catch (error) {
             alert(error)

@@ -2,11 +2,9 @@ import React, { useState } from 'react'
 import { Row, Col,  Button } from 'antd'
 import './auth.css' 
 import { Link } from 'react-router-dom'
-import { useAuth } from '../../../Context/AuthContext'
+
 function Authpage() {
-console.log(localStorage);
-const { getCurrentUsername } = useAuth()
-console.log(getCurrentUsername());
+
     return (
         <div >
             <Row  >

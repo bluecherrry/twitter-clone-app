@@ -3,7 +3,7 @@ import { Button, Form,  Input, Row, Card, Col, Alert } from 'antd'
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import { Link, useHistory } from 'react-router-dom'
 import { useAuth } from '../../../Context/AuthContext'
-import { database, auth } from './../../../firebase/firebase'
+
 
 function Login() {
     const [form] = Form.useForm();

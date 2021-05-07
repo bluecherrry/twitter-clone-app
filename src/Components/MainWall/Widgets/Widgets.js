@@ -4,7 +4,7 @@ import { Input, Table } from 'antd';
 import axios from "axios";
 import { userColumns } from "./hmm/columns";
 import { useTableSearch } from "./hmm/useTableSearch";
-import firebase from 'firebase'
+
 import FriendList from './UserList';
 function Widgets() {
     // const [allusers, setAllUsers] = useState([])
@@ -48,8 +48,8 @@ function Widgets() {
     return (
         <div className="widgets">
             <div className="widgets__input">
-                <FriendList/>
-            
+                {/* <FriendList/> */}
+            hello
 
             </div>
         </div>

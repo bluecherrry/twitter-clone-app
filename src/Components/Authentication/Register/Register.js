@@ -21,19 +21,8 @@ function RegisterForm(props) {
     const [isButtonLoading, setIsButtonLoading] = useState(false);
 
     const onFinish= (value ) => {
-      signup(usernameRef.current.state.value,emailRef.current.state.value, passwordRef.current.state.value)
+    return  signup(usernameRef.current.state.value, passwordRef.current.state.value,emailRef.current.state.value)
      
-      axios.post(`https://twitter-app-ddf5b-default-rtdb.firebaseio.com/users.json`,value)
-      .then((res) =>{
-         console.log(res);
-      }
-     )
-        .catch((error)=>{
-             console.log(error,"error");
-           }
-        )
-       // axios.post(`https://twitter-app-ddf5b-default-rtdb.firebaseio.com/value.json`,value)
-
 }  
 const handleLoading = () => {
    setIsButtonLoading(true);
@@ -167,9 +156,9 @@ const handleLoading = () => {
                                     }
                                 >
                                  <Link to="/policy/agreement">
-                           sign up 
+                        sign up 
                                 </Link>
-                                                
+                                                   
                                 </Button>
                             )}
                         </Form.Item>

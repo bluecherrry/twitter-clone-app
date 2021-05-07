@@ -2,12 +2,11 @@ import React from 'react'
 import { Row, Col, Avatar } from 'antd'
 import './post.css'
 import { UserOutlined, CommentOutlined, RetweetOutlined, HeartOutlined, ShareAltOutlined } from '@ant-design/icons'
-import axios from 'axios'
 import Form from 'antd/lib/form/Form'
 function Post({
-    displayName, username, text, image, avatar,createdAt
+    displayName, username, text, image, avatar
 }) {
-  //  var myTimestamp = firebase.firestore.Timestamp.fromDate(new Date());
+
 
     return (
 
@@ -20,7 +19,7 @@ function Post({
                 <div className="post_header">
 
                     <div className="post_headerText">
-                        {displayName}
+                       
                         <span className="post_headerSpecial">
                             @ {username}
                          
@@ -32,9 +31,7 @@ function Post({
                     </div>
                 </div>
                 <img src={image} />
-               {/* <p>
-                   {createdAt}
-               </p> */}
+               
                 <div className="post_footer">
                     <CommentOutlined />
                     <RetweetOutlined />
