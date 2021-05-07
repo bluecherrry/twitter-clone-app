@@ -1,10 +1,11 @@
-import React, { useState, useEffect,useContext } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { Form, Avatar, Input, Button, Row, Col } from 'antd'
 import "./TweetBox.css";
 import UploadImage from '../Uploads/Upload'
 import { UserOutlined } from '@ant-design/icons'
 import Parse from 'parse/dist/parse.min.js';
-import FeedContext from '../../../Context/FeedContext';
+import {FeedContext} from '../../../Context/FeedContext';
+
 Parse.initialize("TWITTER_ID", "");
 Parse.serverURL = 'http://localhost:1337/parse'
 
@@ -13,28 +14,34 @@ function TweetBox(props) {
     const { TextArea } = Input;
     const [tweetMessage, setTweetMessage] = useState("")
     const [tweetImage, setTweetImage] = useState("")
-    const feedContext = useContext(FeedContext);
+    const {dispatch} = useContext(FeedContext);
 
-        const user = Parse.User.current();
+    const user = Parse.User.current();
 
-        const sendTweet = async() => {
-             const Post = Parse.Object.extend("Post");  
-             const myPost = new Post();
-              myPost.set("postMsg", tweetMessage);
-                 myPost.set("user", user);
-              myPost.save();
-             feedContext.dispatch({type :" add_tweet",payload  :{...Post}})
-                setTweetMessage("")
-        
+    const sendTweet = async () => {
+        const Post = Parse.Object.extend("Post");
+        const myPost = new Post();
+        myPost.set("postMsg", tweetMessage);
+        myPost.set("user", user);
+        myPost.save();
+        setTweetMessage("")
+        console.log(tweetMessage, user.attributes.username,"amir");
+        dispatch({ type: "add_tweet", payload:{
+            post: tweetMessage,
+            author: user.attributes.username
+        }})
+        //console.log(dispatch.payload,"po");
         //get all posts from this user
         // const query = new Parse.Query(Post);
         // query.equalTo("user", user);
         // const userPosts = await query.find();
-        
+
     }
-  
+    
+
     const onChange = e => {
         setTweetMessage(e.target.value);
+       
     };
     return (
         <div className="tweetBox">

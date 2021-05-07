@@ -1,7 +1,7 @@
 import React from 'react'
 //antd library
 import 'antd/dist/antd.css';
-import AppReducer from './Reducers/appReducer'
+
 //import router
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import Authpage from './Components/Authentication/AuthPage/Authpage';
@@ -14,18 +14,20 @@ import { AuthProvider } from './Context/AuthContext';
 import InternalServer from './Components/exception/InternalServer';
 import NotFound from './Components/exception/NotFound/NotFound.js'
 import Profile from './Components/MainWall/Profile/Profile';
-import FeedContext from './Context/FeedContext';
+import FeedProvider from './Context/FeedContext';
+
 function App() {
   
-  const [state , dispatch] = React.useReducer(AppReducer , {
-    posts : [],
-   
-})
+ 
+// console.log(state,"state");
+// setTimeout(()=> {
+//   dispatch({type : 'add_tweet',payload : {tweet : "hfdf"}})
+// },6000)
   return (
 
     <AuthProvider>
-      <FeedContext.Provider value={{ posts: state.posts }}>
-        <Router>
+      <FeedProvider>
+         <Router>
           <Switch>
             <Route exact path="/" component={Authpage} />
             <Route path="/register/register" component={Register} />
@@ -37,8 +39,8 @@ function App() {
             <Route component={NotFound} />
           </Switch>
         </Router>
-      </FeedContext.Provider>
-
+      </FeedProvider>
+       
     </AuthProvider>
   );
 }
