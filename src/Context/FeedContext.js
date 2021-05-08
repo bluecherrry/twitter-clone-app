@@ -10,7 +10,7 @@ Parse.serverURL = 'http://localhost:1337/parse'
 
 export const FeedProvider = props => {
 const [posts , dispatch] = useReducer(PostReducer , [])
-console.log(posts,"feed context posts")
+//console.log(posts,"feed context posts")
 return (
     <FeedContext.Provider value={{posts,dispatch}}>
     {props.children}

@@ -18,11 +18,6 @@ import FeedProvider from './Context/FeedContext';
 
 function App() {
   
- 
-// console.log(state,"state");
-// setTimeout(()=> {
-//   dispatch({type : 'add_tweet',payload : {tweet : "hfdf"}})
-// },6000)
   return (
 
     <AuthProvider>

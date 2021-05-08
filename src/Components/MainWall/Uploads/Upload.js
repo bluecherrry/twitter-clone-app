@@ -2,7 +2,7 @@ import { Upload, Button } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
 
 import React, {useState} from 'react'
-// import {storage} from '../../../firebase/firebase'
+
 export function UploadImage()  {
     const [image, setImage] = useState(null)
     
@@ -12,35 +12,18 @@ export function UploadImage()  {
           }
         }
             const handleUpload = () => {
-    //           const uploadTask = storage.ref(`images/${image.name}`).put(image);
-    //           uploadTask.on(
-    //           "state_changed",
-    //           snapshot => {},
-    //           error => {
-    //             console.log(error);
-    //           },
-    //           () => {
-    //             storage
-    //             .ref("images")
-    //             .child(image.name)
-    //             .getDownloadURL()
-    //             .then(url => {
-    //               console.log(url);
-    //             });
-    //           }
-    //           );
+                console.log("uploaad");
      }
         return (
-           
-              
-              
+
                 <>
                   <Upload
-                    
                     listType="picture"
-                    defaultFileList={[...fileList]}
+                    
                   >
-                    <Button icon={<UploadOutlined />}>Upload</Button>
+                    <Button
+                    onClick={handleUpload}
+                    icon={<UploadOutlined />}>Upload Image</Button>
                   </Upload>
                  
                 

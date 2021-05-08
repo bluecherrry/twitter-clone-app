@@ -23,7 +23,7 @@ function Sidebar() {
                     overflow: 'hidden',
                     height: '100vh',
                     position: 'fixed',
-                    left: '0'
+                    
                 }}
                 breakpoint="sm"
                 collapsedWidth="60"

@@ -156,7 +156,7 @@ const handleLoading = () => {
                                     }
                                 >
                                  <Link to="/policy/agreement">
-                        sign up 
+                                    sign up
                                 </Link>
                                                    
                                 </Button>

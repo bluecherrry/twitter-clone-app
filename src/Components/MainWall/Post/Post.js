@@ -3,6 +3,7 @@ import { Row, Col, Avatar } from 'antd'
 import './post.css'
 import { UserOutlined, CommentOutlined, RetweetOutlined, HeartOutlined, ShareAltOutlined } from '@ant-design/icons'
 import Form from 'antd/lib/form/Form'
+import LikeButtton from './LikeButtton'
 function Post({
     displayName, username, text, image, avatar
 }) {
@@ -35,7 +36,7 @@ function Post({
                 <div className="post_footer">
                     <CommentOutlined />
                     <RetweetOutlined />
-                    <HeartOutlined />
+                   <LikeButtton/>
                     <ShareAltOutlined />
                 </div>
 

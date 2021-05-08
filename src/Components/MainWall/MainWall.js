@@ -17,7 +17,7 @@ function MainWall() {
     // });
      return (
         <div>
-            hello
+            
             <Row justify="center">
                 <Col xs={1} xl={6} className="sidebar-col" >
                      <Sidebar /> 

@@ -6,8 +6,8 @@ import Post from '../Post/Post';
 import Parse from 'parse/dist/parse.min.js';
 import { useAuth } from '../../../Context/AuthContext'
 import { useHistory } from 'react-router-dom'
-import FeedProvider, { FeedContext } from '../../../Context/FeedContext';
-import PostReducer from '../../../Reducers/PostReducer'
+import  { FeedContext } from '../../../Context/FeedContext';
+
 Parse.initialize("TWITTER_ID", "");
 Parse.serverURL = 'http://localhost:1337/parse'
 
@@ -65,7 +65,8 @@ function Feed(props) {
                 <Header className="site-layout-sub-header-background" style={{ padding: 0 }}>
                     Home
 
-                <Button
+             <div style={{position:"absolute",right:"0",top:"0"}}>
+             <Button
                         type="submit"
                         fullWidth
                         variant="contained"
@@ -74,6 +75,7 @@ function Feed(props) {
                     >
                         Logout
           		</Button>
+             </div>
 
                 </Header>
             </div>

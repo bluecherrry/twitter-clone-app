@@ -1,0 +1,19 @@
+.profile__header{
+    background-color: rgb(186, 215, 216);
+    height: 20rem;
+}
+.profile__user__pic{
+    border-radius: 50%;
+    background-color: cornflowerblue;
+    position: absolute;
+    left: 40%;
+    top:10%;
+    width: 5rem;height: 5rem;
+}
+.profile__user{
+    text-align:center;
+    font-size: 30px;
+    position: absolute;
+    top: 50%;left: 30%;
+    background-color: rgb(55, 99, 99);
+}
