@@ -7,11 +7,8 @@ function PostReducer(state, action) {
 
     switch (action.type) {
         case 'init_tweet' :
-            let tweet = action.payload
-            return {
-                ...state,
-                tweet
-            }
+            let tweet = action.payload;
+            return tweet;
         case 'add_tweet':
             return addTweet(state, action);
 

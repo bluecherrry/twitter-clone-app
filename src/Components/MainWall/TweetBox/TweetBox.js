@@ -24,6 +24,10 @@ function TweetBox(props) {
         myPost.set("postMsg", tweetMessage);
         myPost.set("user", user);
         myPost.save();
+
+
+    
+
         setTweetMessage("")
         dispatch({
             type: "add_tweet", payload: {
