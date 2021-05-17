@@ -20,21 +20,19 @@ function Feed(props) {
     const fetchPosts = () => {
         var Post = Parse.Object.extend("Post");
         var query = new Parse.Query(Post);
-        query.ascending("craetedAt")
         let tmpPosts = [];
         query.include("user");
+        query.descending("createdAt");
         query.find()
             .then(function (results) {
                 for (let i in results) {
                     var obj = results[i];
-                    tmpPosts.push(obj);
-
+                    tmpPosts.push(obj);         
                 }
-
                 dispatch({ type: 'init_tweet', payload: tmpPosts });
             })
     }
-   
+
     useEffect(() => {
 
         fetchPosts()
@@ -96,5 +94,6 @@ function Feed(props) {
 
     )
 }
+
 
 export default Feed
