@@ -1,19 +1,16 @@
-import React, { useState, useEffect, useReducer, useContext } from 'react'
-import { Layout, Button, Alert } from 'antd';
+import React, { useEffect, useContext } from 'react'
+import { Layout, Button } from 'antd';
 import './feed.css'
 import TweetBox from '../TweetBox/TweetBox';
 import Post from '../Post/Post';
-import Parse from 'parse/dist/parse.min.js';
 import { useAuth } from '../../../Context/AuthContext'
 import { useHistory } from 'react-router-dom'
 import { FeedContext } from '../../../Context/FeedContext';
-
-Parse.initialize("TWITTER_ID", "");
-Parse.serverURL = 'http://localhost:1337/parse'
+import { useParse } from '../../../Context/Parse';
 
 
-function Feed(props) {
-
+function Feed() {
+    const Parse = useParse().Parse
     const { posts, dispatch } = useContext(FeedContext)
     const { logout } = useAuth()
     const { getCurrentUsername } = useAuth()
@@ -31,10 +28,12 @@ function Feed(props) {
                 }
                 dispatch({ type: 'init_tweet', payload: tmpPosts });
             })
+            .catch((error)=> {
+                alert(error)
+            })
     }
 
     useEffect(() => {
-
         fetchPosts()
     }, [])
 
@@ -58,7 +57,6 @@ function Feed(props) {
             <div  >
                 <Header className="site-layout-sub-header-background" style={{ padding: 0 }}>
                     Home
-
              <div style={{ position: "absolute", right: "0", top: "0" }}>
                         <Button
                             type="submit"
@@ -70,11 +68,9 @@ function Feed(props) {
                             Logout
           		</Button>
                     </div>
-
                 </Header>
             </div>
             <div >
-
                 <Content>
                     <TweetBox />
                     {posts.map(post => {
@@ -85,15 +81,9 @@ function Feed(props) {
                             />
                         )
                     })}
-
                 </Content>
-
             </div>
-
         </div>
-
     )
 }
-
-
 export default Feed

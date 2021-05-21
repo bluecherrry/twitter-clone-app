@@ -1,6 +1,6 @@
 import React ,{useState}from 'react'
 import { Form, Checkbox ,Button, Row,Col} from 'antd'
-import { Link ,useHistory} from 'react-router-dom'
+import { useHistory} from 'react-router-dom'
 import './Agree.css'
 function Agreement() {
 const [check, setCheck] = useState(false)

@@ -1,8 +1,8 @@
 import React,{useEffect} from 'react'
-import Following from './Following'
+//import Following from './Following'
 import {Row, Col,Avatar} from 'antd'
-import Sidebar from '../Sidebars/Sidebar'
-import Widgets from '../Widgets/Widgets'
+//import Sidebar from '../Sidebars/Sidebar'
+//import Widgets from '../Widgets/Widgets'
 import Parse from 'parse/dist/parse.min.js';
 import { UserOutlined } from '@ant-design/icons'
 import './profile.css'
@@ -12,25 +12,19 @@ Parse.serverURL = 'http://localhost:1337/parse'
 function Profile() {
     const user = Parse.User.current();
    const getusername =  user.get("username")
-    //get all posts from this user
-  
-        const uploadPosts = () => {
-        const Post = Parse.Object.extend("Post");
-        const query = new Parse.Query(Post);
-        query.equalTo("user", user);
-        const userPosts =  query.find(); 
+        // const uploadPosts = () => {
+        // const Post = Parse.Object.extend("Post");
+        // const query = new Parse.Query(Post);
+        // query.equalTo("user", user);
+        // const userPosts =  query.find(); 
          
-        }
-        useEffect(() => {
-            
-           //uploadPosts
-            
+        // }
+        useEffect(() => {     
+           //uploadPosts    
         }, [])
     return (
         <div>
             <Row justify="center">
-             
-                
                <Col span={8}>
                <header className="profile__header">
                    <div  >
@@ -41,11 +35,9 @@ function Profile() {
                    </div>
                    <div className="profile__user">
                         {getusername}
-                   </div>
-                  
+                   </div>   
                </header>
-               <Content>
-                 
+               <Content> 
                </Content>
                </Col>
                 

@@ -1,49 +1,35 @@
-import React, { useState, useEffect, useContext } from 'react'
+import React, { useState, useContext } from 'react'
 import { Form, Avatar, Input, Button, Row, Col } from 'antd'
 import "./TweetBox.css";
 import UploadImage from '../Uploads/Upload'
 import { UserOutlined } from '@ant-design/icons'
-import Parse from 'parse/dist/parse.min.js';
 import { FeedContext } from '../../../Context/FeedContext';
-
-Parse.initialize("TWITTER_ID", "");
-Parse.serverURL = 'http://localhost:1337/parse'
+import {useParse} from '../../../Context/Parse'
 
 
-function TweetBox(props) {
+
+function TweetBox() {
+    const Parse = useParse().Parse
     const { TextArea } = Input;
     const [tweetMessage, setTweetMessage] = useState("")
-    const [tweetImage, setTweetImage] = useState("")
+   // const [tweetImage, setTweetImage] = useState("")
     const { dispatch } = useContext(FeedContext);
-
     const user = Parse.User.current();
-
-    const sendTweet = async () => {
+    const sendTweet =  () => {
         const Post = Parse.Object.extend("Post");
         const myPost = new Post();
         myPost.set("postMsg", tweetMessage);
         myPost.set("user", user);
-        myPost.save();
-
-
-    
-
-        setTweetMessage("")
-        dispatch({
-            type: "add_tweet", payload: {
-                post: tweetMessage,
-                author: user.attributes.username
-            }
+        myPost.save().then((myPost) => {
+            dispatch({
+                type: "add_tweet", payload: myPost  
+            })
         })
-
-       
+        setTweetMessage("")
 
     }
-
-
     const onChange = e => {
         setTweetMessage(e.target.value);
-
     };
     return (
         <div className="tweetBox">

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Button,AutoComplete,Select,Space } from 'antd';
+import { AutoComplete,Select } from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
 import Follow from './Follow';
 function UserList() {
@@ -11,8 +11,8 @@ function UserList() {
     const handleChange = (data) => {
         setvalue(data)
     }
-    const userList = async () => {
-        try {
+    const userList =  () => {
+        //try {
             // await firebase.database().ref('/userName')
             //     .on("value", (datasnapshot) => {
             //         const uuid = firebase.auth().currentUser.uid
@@ -34,14 +34,14 @@ function UserList() {
             // //         })
             //         setAllUsers(users)
             //     })
-        }
-        catch (error) {
-            alert(error)
-        }
+      //  }
+       // catch (error) {
+       //     alert(error)
+       // }
     }
-    useEffect(
-        userList, []
-    )
+   // useEffect(
+      //  userList, []
+   // )
     console.log(allusers, "user");
 
     const handleSearch = (value) => {
@@ -61,28 +61,6 @@ function UserList() {
         </Option>)
     return (
         <div className="search-user">
-{/* 
-            <AutoComplete
-                allowClear={true}
-                dropdownClassName="certain-category-search-dropdown"
-                dropdownMatchSelectWidth={500}
-                style={{
-                    width: 250,
-                    color:'black'
-                }}
-                onSearch={handleSearch}
-                onSelect={onSelect}
-              onChange={handleChange}
-              placeholder="search user"
-                
-            >
-               
-                    {optionslist}
-                
-               
-            </AutoComplete>
-            <Button><SearchOutlined /></Button>
-            */}
              
                 <Select
                     suffixIcon={<SearchOutlined />}

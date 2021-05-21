@@ -1,10 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react'
 import { Button, Form,  Input, Row, Card, Col, Alert } from 'antd'
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
-import { Link, useHistory } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { useAuth } from '../../../Context/AuthContext'
-
-
 function Login() {
     const [form] = Form.useForm();
     //ref
@@ -12,19 +10,12 @@ function Login() {
     const passwordRef = useRef()
     //context 
     const { login } = useAuth()
-    const { getCurrentUsername } = useAuth()
     //usestate
     const [isButtonLoading, setIsButtonLoading] = useState(false);
     const [error, setError] = useState("")
-
-    
-    const onFinish = (value) => {
-        login(emailRef.current.state.value, passwordRef.current.state.value)  
-        console.log(localStorage,"local")
-        
-        setError("")
-       // catch{ setError("Failed to log in")
-         //console.log(error);
+    const onFinish = () => {
+        login(emailRef.current.state.value, passwordRef.current.state.value)          
+        setError("") 
     }
     const handleLoading = () => {
         setIsButtonLoading(true);
@@ -59,7 +50,6 @@ function Login() {
                     >
                         <Form.Item
                             name="email"
-
                             rules={[
                                 {
                                     type: 'email',
@@ -91,7 +81,7 @@ function Login() {
                             />
                         </Form.Item>
                         <Form.Item>
-                            <a className="login-form-forgot" href="">
+                            <a className="login-form-forgot" href="/">
                                 Forgot password
                             </a>
                         </Form.Item>
@@ -111,7 +101,6 @@ function Login() {
                                         Log in 
                                     </Link>   
                                 </Button>)}
-
                         </Form.Item> Or <Link to="/register/register">register now!</Link>
                     </Form>
                 </Card>

@@ -1,6 +1,6 @@
 import React from 'react'
 import Sidebar from './Sidebars/Sidebar'
-import Widgets from './Widgets/Widgets'
+// import Widgets from './Widgets/Widgets'
 import Feed from './Feed/Feed'
 import './wall.css'
 import { Row,Col } from 'antd'
@@ -8,13 +8,6 @@ import Parse from 'parse/dist/parse.min.js';
 Parse.initialize("TWITTER_ID", "");
 Parse.serverURL = 'http://localhost:1337/parse'
 function MainWall() {
-    const user = Parse.User.current();
-    // user.fetch().then(function(fetchedUser){
-    //     var name = fetchedUser.getUsername();
-    //     console.log(name);
-    // }, function(error){
-    //     console.log(error);
-    // });
      return (
         <div>
             

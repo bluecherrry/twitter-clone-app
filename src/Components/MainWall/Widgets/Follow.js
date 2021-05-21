@@ -1,16 +1,14 @@
-import React, { useState, useEffect } from 'react'
-import { componentWillAppendToBody } from "react-append-to-body";
+import React, { useState} from 'react'
 import { Button, Tabs } from 'antd'
 function Follow(props) {
     const [following, setFollowing] = useState([])
     const uniqueNames = [...new Set(following)]
     const [list, updateList] = useState(uniqueNames);
     const { TabPane } = Tabs;
-
     function callback(key) {
         console.log(key);
     }
-    const addMoreItem = (item) => {
+    const addMoreItem = () => {
         setFollowing(prevItems => [...prevItems,
         props.name
         ]);
@@ -26,7 +24,7 @@ function Follow(props) {
         updateList(list.filter(item => item.name !== name));
        
     }
-     console.log(updateList);
+
     return (
         <div>
             {props.name}{" "}{" "}{" "}

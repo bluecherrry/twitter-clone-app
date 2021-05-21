@@ -17,13 +17,11 @@ function Sidebar() {
 
     return (
         <div className="sidebar">
-
             <Sider
                 style={{
                     overflow: 'hidden',
                     height: '100vh',
-                    position: 'fixed',
-                    
+                    position: 'fixed', 
                 }}
                 breakpoint="sm"
                 collapsedWidth="60"
@@ -60,10 +58,6 @@ function Sidebar() {
                         <SidebarOption Icon={MoreHorizIcon} text="More" />
 
                     </Link>
-
-
-
-                    {/* Button -> Tweet */}
                     <Button variant="outlined" className="sidebar__tweet" fullWidth>
                         Tweet
                      </Button>

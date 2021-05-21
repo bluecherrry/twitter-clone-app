@@ -1,12 +1,9 @@
 import React from 'react'
 import { Tabs } from 'antd';
 function Following() {
-
-
     const { TabPane } = Tabs;
-
     function callback(key) {
-        console.log(key);
+       // console.log(key);
     }
     return (
         <div>

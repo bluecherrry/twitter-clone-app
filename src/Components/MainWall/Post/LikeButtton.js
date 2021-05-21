@@ -1,14 +1,12 @@
-import React, { useReducer, useEffect, useState } from 'react'
+import React, { useReducer, useEffect } from 'react'
 import LikeReducer from '../../../Reducers/likeReducer'
-import { Button, Empty } from 'antd'
-import Parse from 'parse/dist/parse.min.js';
+import { Button } from 'antd'
 import { initialState, HANDLE_LIKE, HANDLE_DISLIKE } from '../../../Reducers/likeReducer'
 import { HeartTwoTone, HeartOutlined } from '@ant-design/icons';
-
-Parse.initialize("TWITTER_ID", "");
-Parse.serverURL = 'http://localhost:1337/parse'
+import { useParse } from '../../../Context/Parse';
 
 function LikeButtton({ post }) {
+    const Parse = useParse().Parse
     const [state, dispatch] = useReducer(LikeReducer, initialState);
     const { likes, active } = state;
     const user = Parse.User.current();
@@ -26,35 +24,39 @@ function LikeButtton({ post }) {
                     payload: res
                 })
             })
+            .catch((error)=> {
+                alert(error)
+            })
     }
 
-    const disLike = async () => {
+    const disLike = () => {
         const query = new Parse.Query(PostsLike);
         query.equalTo("post", post);
-        const results = await query.find().then((u) => {
+        query.find().then((u) => {
             let d = u.find(e => e.attributes.user.id === user.id)
             d.destroy().then((e) => {
                 dispatch({
                     type: HANDLE_DISLIKE, payload: { Likes: u, UserId: user.id }
-
                 })
             }
-
-            )
             
+            )
+            .catch((error)=> {
+                alert(error)
+            })
         })
     }
-
-    const showLikes = async () => {
+    const showLikes =  () => {
         const query = new Parse.Query(PostsLike);
         query.equalTo("post", post);
-        const results = await query.find();
-        dispatch({
-            type: 'init_like', payload: { likes: results, userId: user.id }
-        })
+        query.find()
+            .then((results) => {
+                dispatch({
+                    type: 'init_like', payload: { likes: results, userId: user.id }
+                })
+            })
+
     }
-
-
     useEffect(() => {
         showLikes()
 

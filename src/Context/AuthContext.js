@@ -1,52 +1,45 @@
 import React, { useContext, useEffect, useState } from 'react'
-import Parse from 'parse/dist/parse.min.js';
+import { useParse } from './Parse';
 
-Parse.initialize("TWITTER_ID", "");
-Parse.serverURL = 'http://localhost:1337/parse'
 
 const AuthContext = React.createContext()
-const user = new Parse.User();
-
 export function useAuth() {
   return useContext(AuthContext)
 }
 export function AuthProvider({ children }) {
   const [currentUser, setCurrentUser] = useState() //no user
-  const [loading, setLoading] = useState(false)
-  const CurrentUser = Parse.User.current();
-  async function signup(username, password, email) {
-    console.log(email);
+  // const [loading, setLoading] = useState(false)
+  const Parse = useParse().Parse
+  const user = new Parse.User();
+  function signup(username, password, email) {
     user.set("username", username);
     user.set("password", password);
-    user.set("email", email);
-    try {
-      await user.signUp();
-      console.log("success")
-    } catch (error) {
-      console.log(error, "sign up error");
-    }
+    user.set("email", email)
+    user.save()
+      .then(() => {
+        user.signUp();
+      })
+
   }
-  async function login(email, password) {
-    var user = Parse.User
+  function login(email, password) {
+    Parse.User
       .logIn(email, password).then(function (user) {
         console.log('User created successful with name: ' + user.get("username") + ' and email: ' + user.get("email"));
       }).catch(function (error) {
         console.log("Error: " + error.code + " " + error.message);
       });
   }
-  async function logout() {
+  function logout() {
     Parse.User.logOut().then(() => {
       console.log("logged out");
       // this will now be null
-    });
-
-
-
+    }) .catch((error)=> {
+      alert(error)
+  })
   }
   function getCurrentUsername() {
     return Parse.User.current()
   }
-
   useEffect(() => {
     const unsubscribe = Parse.User.current()
     return unsubscribe //unmount
@@ -58,7 +51,7 @@ export function AuthProvider({ children }) {
     signup,
     logout,
     getCurrentUsername,
-    //  getPosts
+
 
   }
   return (

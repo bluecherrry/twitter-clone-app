@@ -1,4 +1,4 @@
-import React, { useReducer } from "react";
+
 export const HANDLE_LIKE = Symbol("HANDLE_LIKE");
 export const HANDLE_DISLIKE = Symbol("HANDLE_DISLIKE");
 export const initialState = {
@@ -7,20 +7,18 @@ export const initialState = {
 };
 
 const LikeReducer = (state, action) => {
-  const { likes, active } = state;
+ 
   switch (action.type) {
     case 'init_like':
       let { likes, userId } = action.payload;
       let active = false;
       likes.forEach(like => {
         active = like.get('user').id === userId
-
       })
       return {
         likes,
         active
       }
-
     case HANDLE_LIKE:
 
       let newlike = action.payload;
@@ -28,22 +26,22 @@ const LikeReducer = (state, action) => {
         likes: [...state.likes, newlike],
         active: true
       };
-
     case HANDLE_DISLIKE:
       let { Likes, UserId } = action.payload
       const finalLike = Likes.filter(like => {
-        return like.get('user').id !== UserId
+        return  like.get('user').id !== UserId
       })
+
       return {
-        likes: finalLike
+        likes:finalLike
         ,
         active: false,
-
+        
       }
 
     default:
       return state;
   }
-
+  
 };
 export default LikeReducer

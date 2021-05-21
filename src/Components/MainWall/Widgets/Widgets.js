@@ -1,11 +1,12 @@
-import React, { useState } from 'react'
+import React from 'react'
 import './Widgets.css'
-import { Input, Table } from 'antd';
-import axios from "axios";
-import { userColumns } from "./hmm/columns";
-import { useTableSearch } from "./hmm/useTableSearch";
+// import { Input, Table } from 'antd';
+// import axios from "axios";
+// import { userColumns } from "./hmm/columns";
+// import { useTableSearch } from "./hmm/useTableSearch";
+// import FriendList from './UserList';
 
-import FriendList from './UserList';
+
 function Widgets() {
     // const [allusers, setAllUsers] = useState([])
 
@@ -49,8 +50,6 @@ function Widgets() {
         <div className="widgets">
             <div className="widgets__input">
                 {/* <FriendList/> */}
-            hello
-
             </div>
         </div>
     )

@@ -18,17 +18,9 @@ function PostReducer(state, action) {
 }
 
 export default PostReducer;
-
 let addTweet = (state, action) => {
     let post = action.payload;
-    return [
-        ...state,
-        {
-            post: post.post,
-            author: post.author
-        }
-    ]
-
-
-
+    let postsArray = [...state]
+     postsArray.unshift(post)
+    return postsArray
 }

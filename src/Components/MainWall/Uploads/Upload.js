@@ -1,21 +1,17 @@
 import { Upload, Button } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
-
-import React, {useState} from 'react'
-
+import React from 'react'
 export function UploadImage()  {
-    const [image, setImage] = useState(null)
-    
-        const fileList = e => {
-          if(e.target.picture[0]){
-            setImage(e.target.picture[0])
-          }
-        }
+   // const [image, setImage] = useState(null)
+        // const fileList = e => {
+        //   if(e.target.picture[0]){
+        //     setImage(e.target.picture[0])
+        //   }
+        // }
             const handleUpload = () => {
-                console.log("uploaad");
+              ///  console.log("uploaad");
      }
         return (
-
                 <>
                   <Upload
                     listType="picture"
@@ -25,8 +21,6 @@ export function UploadImage()  {
                     onClick={handleUpload}
                     icon={<UploadOutlined />}>Upload Image</Button>
                   </Upload>
-                 
-                
                 </>
                 
               
